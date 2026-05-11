@@ -107,7 +107,7 @@ document.getElementById("submitBtn").addEventListener("click", async () => {
 async function addEventEvaluation(eventId, evaluationData) {
   try {
     const response = await fetch(
-      `http://localhost:8080/api/auth/${eventId}/addEvaluation`,
+      `https://securebackend-ox2e.onrender.com/api/auth/${eventId}/addEvaluation`,
       {
         method: "POST",
         headers: {
