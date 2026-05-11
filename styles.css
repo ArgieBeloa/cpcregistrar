@@ -1,0 +1,142 @@
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to bottom right, #dfefff, #f5f8ff);
+  margin: 0;
+  padding: 20px;
+}
+
+.container {
+  max-width: 600px;
+  margin: auto;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* QUESTION CARD */
+.question-card {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.question-text {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+/* STARS */
+.stars {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.star {
+  font-size: 28px;
+  cursor: pointer;
+  color: #ccc;
+}
+
+.star.active {
+  color: gold;
+}
+
+/* INPUT */
+textarea {
+  width: 100%;
+  min-height: 100px;
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  background: #fff;
+}
+
+/* BUTTON */
+button {
+  width: 100%;
+  margin-top: 10px;
+  padding: 12px;
+  background: #4F46E5;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+/* LOADING */
+.loading {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+.loader {
+  width: 50px;
+  height: 50px;
+  border: 5px solid #fff3;
+  border-top: 5px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  100% { transform: rotate(360deg); }
+}
+
+/* MODAL */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: white;
+  padding: 25px;
+  border-radius: 15px;
+  text-align: center;
+}
+.info-box {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 18px;
+  background: white;
+  border-radius: 16px;
+  margin-bottom: 10px;
+}
+
+/* FIELD FIX */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  width: 100%; /* IMPORTANT */
+}
+
+/* INPUT FIX */
+.field input,
+.field select {
+  width: 100%;
+  padding: 14px;
+  border-radius: 12px;
+
+  border: 1px solid rgba(0,0,0,0.1);
+
+  /* IMPORTANT FIX */
+  box-sizing: border-box;
+}
