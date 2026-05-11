@@ -1,9 +1,6 @@
-
-const ids =[
- "6993a8adcd36cbda8cec3a03"
-]
-
+// =========================
 // QUESTIONS
+// =========================
 const evaluationData = [
   { questionId: "1", questionText: "How would you rate the overall event?" },
   { questionId: "2", questionText: "How was the speaker's presentation?" },
@@ -38,7 +35,7 @@ evaluationData.forEach((q) => {
 });
 
 // =========================
-// STAR CLICK
+// STAR CLICK HANDLER
 // =========================
 document.addEventListener("click", (e) => {
   if (e.target.classList.contains("star")) {
@@ -65,12 +62,11 @@ document.getElementById("submitBtn").addEventListener("click", async () => {
     studentRate: studentRate[q.questionId] || 0,
   }));
 
-  const total = Object.values(studentRate).reduce((a, b) => a + b, 0);
+  const values = Object.values(studentRate);
 
-  const avg =
-    Object.values(studentRate).length > 0
-      ? total / Object.values(studentRate).length
-      : 0;
+  const total = values.length ? values.reduce((a, b) => a + b, 0) : 0;
+
+  const avg = values.length ? total / values.length : 0;
 
   const payload = {
     studentAverageRate: avg,
@@ -78,26 +74,32 @@ document.getElementById("submitBtn").addEventListener("click", async () => {
     studentEvaluationInfos: infos,
   };
 
-
+  const eventId = "6993a8adcd36cbda8cec3a03";
 
   try {
     // 🔥 SHOW LOADING
     document.getElementById("loading").style.display = "flex";
 
-    // 🔥 CALL API
-    const result = await addEventEvaluation(ids[0], payload);
+    // 🔥 PREVENT DOUBLE CLICK
+    const btn = document.getElementById("submitBtn");
+    btn.disabled = true;
 
-    // 🔥 HIDE LOADING
-    document.getElementById("loading").style.display = "none";
-
-    // 🔥 SHOW SUCCESS MODAL
-    document.getElementById("modal").style.display = "flex";
+    // 🔥 API CALL
+    const result = await addEventEvaluation(eventId, payload);
 
     console.log("SUCCESS:", result);
+
+    // 🔥 SHOW MODAL
+    document.getElementById("modal").style.display = "flex";
+
   } catch (error) {
-    document.getElementById("loading").style.display = "none";
+    console.error("ERROR:", error);
     alert("Failed to submit evaluation");
-    console.error(error);
+
+  } finally {
+    // 🔥 ALWAYS RUN
+    document.getElementById("loading").style.display = "none";
+    document.getElementById("submitBtn").disabled = false;
   }
 });
 
@@ -105,29 +107,25 @@ document.getElementById("submitBtn").addEventListener("click", async () => {
 // API CALL FUNCTION
 // =========================
 async function addEventEvaluation(eventId, evaluationData) {
-  try {
-    const response = await fetch(
-      `https://securebackend-ox2e.onrender.com/api/auth/${eventId}/addEvaluation`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(evaluationData),
-      }
-    );
-
-    const data = await response.json();
-
-    if (!response.ok) {
-      throw new Error(data.message || "Failed to add evaluation");
+  const response = await fetch(
+    `https://securebackend-ox2e.onrender.com/api/auth/${eventId}/addEvaluation`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+      },
+      body: JSON.stringify(evaluationData),
     }
+  );
 
-    return data;
-  } catch (error) {
-    console.error("❌ API Error:", error.message);
-    throw error;
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.message || "Failed to add evaluation");
   }
+
+  return data;
 }
 
 // =========================
