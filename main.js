@@ -2,11 +2,15 @@
 // QUESTIONS
 // =========================
 const evaluationData = [
-  { questionId: "1", questionText: "How would you rate the overall event?" },
-  { questionId: "2", questionText: "How was the speaker's presentation?" },
-  { questionId: "3", questionText: "Was the event well organized?" },
-  { questionId: "4", questionText: "How satisfied are you with the venue?" },
-  { questionId: "5", questionText: "Would you attend future events like this?" }
+  { questionId: "1", questionText: "Started on time" },
+  { questionId: "2", questionText: "Venue Arrangement" },
+  { questionId: "3", questionText: "Sound System" },
+  { questionId: "4", questionText: "Program Flow" },
+  { questionId: "5", questionText: "Time Management" },
+  { questionId: "6", questionText: "Decorations/Stage setup" },
+  { questionId: "7", questionText: "Safety and Security" },
+  { questionId: "8", questionText: "Overall Experience" },
+
 ];
 
 const questionsContainer = document.getElementById("questionsContainer");
@@ -55,6 +59,8 @@ document.addEventListener("click", (e) => {
 // SUBMIT
 // =========================
 document.getElementById("submitBtn").addEventListener("click", async () => {
+  const studentName = document.getElementById("studentName").value;
+  const studentCourse = document.getElementById("course").value;
   const suggestion = document.getElementById("suggestion").value;
 
   const infos = evaluationData.map((q) => ({
@@ -69,8 +75,10 @@ document.getElementById("submitBtn").addEventListener("click", async () => {
   const avg = values.length ? total / values.length : 0;
 
   const payload = {
+    studentName: studentName,
     studentAverageRate: avg,
     studentSuggestion: suggestion,
+    course: studentCourse,
     studentEvaluationInfos: infos,
   };
 

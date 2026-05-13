@@ -1,70 +1,193 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!-- RESPONSIVE -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>Event Evaluation</title>
 
+  <!-- CSS -->
   <link rel="stylesheet" href="styles.css" />
 
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+  <!-- FONT AWESOME -->
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 </head>
 
 <body>
 
   <div class="container">
 
+    <!-- TITLE -->
     <h1 class="title">Event Evaluation</h1>
 
-     <div class="info-box">
+    <!-- INFO BOX -->
+    <div class="info-box">
 
-  <div class="field">
-    <label for="studentName">Name</label>
-    <input type="text" id="studentName" placeholder="Enter your name" />
-  </div>
+      <!-- NAME -->
+      <div class="field">
+        <label for="studentName">Name</label>
 
-  <div class="field">
-    <label for="course">Course</label>
-    <input type="text" id="course" placeholder="Enter your course" />
-  </div>
+        <input
+          type="text"
+          id="studentName"
+          placeholder="Enter your name"
+          required
+        />
+      </div>
 
-  <div class="field">
-    <label for="type">Type</label>
-    <select id="type">
-      <option value="">Select Type</option>
-      <option value="Baccalaurete">Baccalaurete Mass</option>
-      <option value="Completion">Recognition</option>
-      <option value="Commencement">Commencement Exercise</option>
-    </select>
-  </div>
+      <!-- COURSE -->
+      <div class="field">
 
-</div>
+        <label for="course">Course</label>
 
+        <!-- FIXED: added id="course" -->
+        <select id="course" required>
+
+          <!-- FIXED: placeholder option -->
+          <option value="" selected disabled>
+            Select Course
+          </option>
+
+          <option value="Bachelor of Science in Psychology">
+            Bachelor of Science in Psychology
+          </option>
+
+          <option value="Bachelor of Science in Mathematics">
+            Bachelor of Science in Mathematics
+          </option>
+
+          <option value="Bachelor of Secondary Education">
+            Bachelor of Secondary Education
+          </option>
+
+          <option value="Bachelor of Elementary Education">
+            Bachelor of Elementary Education
+          </option>
+
+          <option value="Bachelor of Physical Education">
+            Bachelor of Physical Education
+          </option>
+
+          <option value="Bachelor of Science in Criminology">
+            Bachelor of Science in Criminology
+          </option>
+
+          <option value="Bachelor of Science in Accountancy">
+            Bachelor of Science in Accountancy
+          </option>
+
+          <option value="Bachelor of Science in Business Administration">
+            Bachelor of Science in Business Administration
+          </option>
+
+          <option value="Bachelor of Science in Hospitality Management">
+            Bachelor of Science in Hospitality Management
+          </option>
+
+          <option value="Bachelor of Science in Tourism & Management">
+            Bachelor of Science in Tourism & Management
+          </option>
+
+          <option value="Bachelor of Science in Information Technology">
+            Bachelor of Science in Information Technology
+          </option>
+
+          <option value="Bachelor of Science in Civil Engineering">
+            Bachelor of Science in Civil Engineering
+          </option>
+
+          <option value="Bachelor of Science in Computer Engineering">
+            Bachelor of Science in Computer Engineering
+          </option>
+
+          <option value="Bachelor of Science in Electrical Engineering">
+            Bachelor of Science in Electrical Engineering
+          </option>
+
+          <option value="Bachelor of Science in Marine Engineering">
+            Bachelor of Science in Marine Engineering
+          </option>
+
+        </select>
+      </div>
+
+      <!-- TYPE -->
+      <div class="field">
+
+        <label for="type">Type</label>
+
+        <select id="type" required>
+
+          <option value="" selected disabled>
+            Select Type
+          </option>
+
+          <option value="Baccalaureate">
+            Baccalaureate Mass
+          </option>
+
+          <option value="Completion">
+            Recognition
+          </option>
+
+          <option value="Commencement">
+            Commencement Exercise
+          </option>
+
+        </select>
+      </div>
+
+    </div>
+
+    <!-- QUESTIONS -->
     <div id="questionsContainer"></div>
 
     <!-- SUGGESTION -->
-    <textarea id="suggestion" placeholder="Add a suggestion..."></textarea>
+    <textarea
+      id="suggestion"
+      placeholder="Add a suggestion..."
+    ></textarea>
 
-    <button id="submitBtn">Submit</button>
+    <!-- BUTTON -->
+    <button id="submitBtn">
+      Submit
+    </button>
 
   </div>
 
   <!-- LOADING -->
   <div id="loading" class="loading">
+
     <div class="loader"></div>
+
     <p>Please wait...</p>
+
   </div>
 
   <!-- SUCCESS MODAL -->
   <div id="modal" class="modal">
+
     <div class="modal-content">
+
       <h2>Success 🎉</h2>
+
       <p>Evaluation added successfully!</p>
-      <button id="closeModal">back</button>
+
+      <button id="closeModal">
+        Back
+      </button>
+
     </div>
+
   </div>
 
+  <!-- JS -->
   <script src="main.js"></script>
+
 </body>
+
 </html>
