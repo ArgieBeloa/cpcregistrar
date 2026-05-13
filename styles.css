@@ -183,6 +183,7 @@ button:active {
   transform: scale(0.98);
 }
 
+
 /* LOADING */
 .loading {
   position: fixed;

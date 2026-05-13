@@ -10,7 +10,6 @@ const evaluationData = [
   { questionId: "6", questionText: "Decorations/Stage setup" },
   { questionId: "7", questionText: "Safety and Security" },
   { questionId: "8", questionText: "Overall Experience" },
-
 ];
 
 const questionsContainer = document.getElementById("questionsContainer");
@@ -21,6 +20,7 @@ const studentRate = {};
 // =========================
 evaluationData.forEach((q) => {
   const div = document.createElement("div");
+
   div.className = "question-card";
 
   div.innerHTML = `
@@ -39,7 +39,7 @@ evaluationData.forEach((q) => {
 });
 
 // =========================
-// STAR CLICK HANDLER
+// STAR CLICK
 // =========================
 document.addEventListener("click", (e) => {
   if (e.target.classList.contains("star")) {
@@ -61,6 +61,7 @@ document.addEventListener("click", (e) => {
 document.getElementById("submitBtn").addEventListener("click", async () => {
   const studentName = document.getElementById("studentName").value;
   const studentCourse = document.getElementById("course").value;
+  const eventType = document.getElementById("type").value;
   const suggestion = document.getElementById("suggestion").value;
 
   const infos = evaluationData.map((q) => ({
@@ -69,13 +70,11 @@ document.getElementById("submitBtn").addEventListener("click", async () => {
   }));
 
   const values = Object.values(studentRate);
-
-  const total = values.length ? values.reduce((a, b) => a + b, 0) : 0;
-
+  const total = values.reduce((a, b) => a + b, 0);
   const avg = values.length ? total / values.length : 0;
 
   const payload = {
-    studentName: studentName,
+    studentName,
     studentAverageRate: avg,
     studentSuggestion: suggestion,
     course: studentCourse,
@@ -85,34 +84,29 @@ document.getElementById("submitBtn").addEventListener("click", async () => {
   const eventId = "6993a8adcd36cbda8cec3a03";
 
   try {
-    // 🔥 SHOW LOADING
     document.getElementById("loading").style.display = "flex";
+    document.getElementById("submitBtn").disabled = true;
 
-    // 🔥 PREVENT DOUBLE CLICK
-    const btn = document.getElementById("submitBtn");
-    btn.disabled = true;
+    await addEventEvaluation(eventId, payload);
 
-    // 🔥 API CALL
-    const result = await addEventEvaluation(eventId, payload);
+    // =========================
+    // SHOW MODAL DATA
+    // =========================
+    document.getElementById("modalName").innerText = studentName;
+    document.getElementById("modalEvent").innerText = eventType;
 
-    console.log("SUCCESS:", result);
-
-    // 🔥 SHOW MODAL
     document.getElementById("modal").style.display = "flex";
 
   } catch (error) {
-    console.error("ERROR:", error);
     alert("Failed to submit evaluation");
-
   } finally {
-    // 🔥 ALWAYS RUN
     document.getElementById("loading").style.display = "none";
     document.getElementById("submitBtn").disabled = false;
   }
 });
 
 // =========================
-// API CALL FUNCTION
+// API
 // =========================
 async function addEventEvaluation(eventId, evaluationData) {
   const response = await fetch(
@@ -121,7 +115,6 @@ async function addEventEvaluation(eventId, evaluationData) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Accept": "application/json",
       },
       body: JSON.stringify(evaluationData),
     }
@@ -129,9 +122,7 @@ async function addEventEvaluation(eventId, evaluationData) {
 
   const data = await response.json();
 
-  if (!response.ok) {
-    throw new Error(data.message || "Failed to add evaluation");
-  }
+  if (!response.ok) throw new Error(data.message);
 
   return data;
 }
@@ -141,4 +132,18 @@ async function addEventEvaluation(eventId, evaluationData) {
 // =========================
 document.getElementById("closeModal").addEventListener("click", () => {
   document.getElementById("modal").style.display = "none";
+});
+
+// =========================
+// SCREENSHOT BACKUP
+// =========================
+document.getElementById("btnScreenshot").addEventListener("click", async () => {
+  const modal = document.querySelector(".modal-content");
+
+  const canvas = await html2canvas(modal);
+
+  const link = document.createElement("a");
+  link.download = "evaluation-backup.png";
+  link.href = canvas.toDataURL();
+  link.click();
 });
