@@ -2,14 +2,14 @@
 // QUESTIONS
 // =========================
 const evaluationData = [
-  { questionId: "1", questionText: "Started on time" },
-  { questionId: "2", questionText: "Venue Arrangement" },
-  { questionId: "3", questionText: "Sound System" },
-  { questionId: "4", questionText: "Program Flow" },
-  { questionId: "5", questionText: "Time Management" },
-  { questionId: "6", questionText: "Decorations/Stage setup" },
-  { questionId: "7", questionText: "Safety and Security" },
-  { questionId: "8", questionText: "Overall Experience" },
+  { questionId: "1", questionText: "1. Started on time" },
+  { questionId: "2", questionText: "2. Venue Arrangement" },
+  { questionId: "3", questionText: "3. Sound System" },
+  { questionId: "4", questionText: "4. Program Flow" },
+  { questionId: "5", questionText: "5. Time Management" },
+  { questionId: "6", questionText: "6. Decorations/Stage setup" },
+  { questionId: "7", questionText: "7. Safety and Security" },
+  { questionId: "8", questionText: "8. Overall Experience" },
 ];
 
 const questionsContainer = document.getElementById("questionsContainer");
@@ -28,9 +28,7 @@ evaluationData.forEach((q) => {
 
     <div class="stars" data-id="${q.questionId}">
       ${[1, 2, 3, 4, 5]
-        .map(
-          (i) => `<i class="fa-solid fa-star star" data-value="${i}"></i>`
-        )
+        .map((i) => `<i class="fa-solid fa-star star" data-value="${i}"></i>`)
         .join("")}
     </div>
   `;
@@ -61,7 +59,6 @@ document.addEventListener("click", (e) => {
 document.getElementById("submitBtn").addEventListener("click", async () => {
   const studentName = document.getElementById("studentName").value;
   const studentCourse = document.getElementById("course").value;
-  const eventType = document.getElementById("type").value;
   const suggestion = document.getElementById("suggestion").value;
 
   const infos = evaluationData.map((q) => ({
@@ -81,8 +78,19 @@ document.getElementById("submitBtn").addEventListener("click", async () => {
     studentEvaluationInfos: infos,
   };
 
-  const eventId = "6993a8adcd36cbda8cec3a03";
+  let eventId = "";
 
+  // GET SELECTED EVENT TYPE
+  const eventType = document.getElementById("type").value;
+
+  // CHECK EVENT TYPE
+  if (eventType === "Baccalaureate") {
+    eventId = "6a0bc2adaf3c7dac867da630";
+  } else if (eventType === "Completion") {
+    eventId = "6a0bc304af3c7dac867da631";
+  } else if (eventType === "Commencement") {
+    eventId = "6a0bc381af3c7dac867da632";
+  }
   try {
     document.getElementById("loading").style.display = "flex";
     document.getElementById("submitBtn").disabled = true;
@@ -96,7 +104,6 @@ document.getElementById("submitBtn").addEventListener("click", async () => {
     document.getElementById("modalEvent").innerText = eventType;
 
     document.getElementById("modal").style.display = "flex";
-
   } catch (error) {
     alert("Failed to submit evaluation");
   } finally {
@@ -117,7 +124,7 @@ async function addEventEvaluation(eventId, evaluationData) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(evaluationData),
-    }
+    },
   );
 
   const data = await response.json();

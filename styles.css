@@ -183,6 +183,17 @@ button:active {
   transform: scale(0.98);
 }
 
+.rating-info {
+  margin-top: 10px;
+  line-height: 1.8;
+  font-size: 15px;
+  color: #444;
+}
+
+.rating-info i {
+  color: gold;
+  margin-right: 5px;
+}
 
 /* LOADING */
 .loading {

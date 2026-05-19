@@ -27,12 +27,12 @@
       <div class="info-box">
         <!-- NAME -->
         <div class="field">
-          <label for="studentName">Name</label>
+          <label for="studentName">Fullname</label>
 
           <input
             type="text"
             id="studentName"
-            placeholder="Enter your name"
+            placeholder="(Last name, First name, Middle intial)"
             required
           />
         </div>
@@ -45,6 +45,22 @@
           <select id="course" required>
             <!-- FIXED: placeholder option -->
             <option value="" selected disabled>Select Course</option>
+
+            <option value="Doctor of Philosophy">
+              Doctor of Philosophy in Education
+            </option>
+
+            <option value="Master of Arts in Education ">
+              Master of Arts in Education
+            </option>
+
+            <option value="Master of Public Administration">
+              Master of Public Administration
+            </option>
+
+            <option value="College of Law">College of Law</option>
+
+            <option value="Bachelor of Arts">Bachelor of Arts</option>
 
             <option value="Bachelor of Science in Psychology">
               Bachelor of Science in Psychology
@@ -117,10 +133,25 @@
 
             <option value="Baccalaureate">Baccalaureate Mass</option>
 
-            <option value="Completion">Recognition</option>
+            <option value="Completion">Completion Rites</option>
 
             <option value="Commencement">Commencement Exercise</option>
           </select>
+        </div>
+      </div>
+
+      <!-- Rates Information -->
+      <div class="info-box">
+        <div class="field">
+          <label>Rating Guide</label>
+
+          <p class="rating-info">
+            <i class="fa-solid fa-star"></i> 1 Star = Poor <br />
+            <i class="fa-solid fa-star"></i> 2 Stars = Fair <br />
+            <i class="fa-solid fa-star"></i> 3 Stars = Good <br />
+            <i class="fa-solid fa-star"></i> 4 Stars = Very Good <br />
+            <i class="fa-solid fa-star"></i> 5 Stars = Excellent
+          </p>
         </div>
       </div>
 
